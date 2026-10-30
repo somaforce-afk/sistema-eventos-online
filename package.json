@@ -1,0 +1,19 @@
+{
+  "name": "sistema-eventos-online",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "deploy": "wrangler d1 migrations apply DB --remote && wrangler deploy",
+    "test": "node scripts/test.mjs"
+  },
+  "devDependencies": {"wrangler": "4.156.0"},
+  "cloudflare": {
+    "bindings": {
+      "DB": {"description": "Crie um banco NOVO para esta instalação. Não selecione bancos usados por outras empresas."},
+      "INITIAL_ADMIN_PASSWORD": {"description": "Crie sua senha administrativa de 12 a 128 caracteres. Não use a senha da Cloudflare ou do GitHub. Você usará essa senha no painel do sistema."}
+    }
+  }
+}

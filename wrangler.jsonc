@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "meus-eventos",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-10-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "no_bundle": true,
+  "find_additional_modules": true,
+  "rules": [{"type": "ESModule", "globs": ["**/*.mjs"]}],
+  "workers_dev": true,
+  "send_metrics": false,
+  "secrets": {"required": ["INITIAL_ADMIN_PASSWORD"]},
+  "d1_databases": [{"binding": "DB", "database_name": "eventos-db", "migrations_dir": "migrations"}]
+}

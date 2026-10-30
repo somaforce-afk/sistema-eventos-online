@@ -1,0 +1,14 @@
+ALTER TABLE events ADD COLUMN start_time TEXT NOT NULL DEFAULT '';
+ALTER TABLE events ADD COLUMN end_time TEXT NOT NULL DEFAULT '';
+ALTER TABLE events ADD COLUMN description TEXT NOT NULL DEFAULT '';
+ALTER TABLE events ADD COLUMN capacity INTEGER;
+ALTER TABLE events ADD COLUMN registrations_open INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE events ADD COLUMN finished INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE events ADD COLUMN image_base64 TEXT;
+ALTER TABLE events ADD COLUMN image_type TEXT;
+ALTER TABLE registrations ADD COLUMN checked_in_at TEXT;
+ALTER TABLE registrations ADD COLUMN source TEXT NOT NULL DEFAULT 'presencial';
+ALTER TABLE registrations ADD COLUMN enrollment_telegram TEXT NOT NULL DEFAULT 'não se aplica';
+UPDATE registrations SET checked_in_at=created;
+CREATE INDEX IF NOT EXISTS registration_attendance ON registrations(event_id,checked_in_at);
+INSERT INTO settings(key,value) VALUES ('schema_version','2') ON CONFLICT(key) DO UPDATE SET value=excluded.value;
